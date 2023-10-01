@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itunes_api_search_app/api/media_typ.dart';
 import 'package:itunes_api_search_app/api/song_remote_repository.dart';
 import 'package:itunes_api_search_app/model/song.dart';
 
@@ -12,8 +13,8 @@ class SongViewModel with ChangeNotifier {
 
   SongViewModel(this._songRepo);
 
-  Future<void> getSongs(String searchTerm) async {
-    final result = await  _songRepo.fetchSongs(searchTerm);
+  Future<void> getSongs(String searchTerm, {MediaType mediaType = MediaType.all, String country = 'ca'}) async {
+    final result = await  _songRepo.fetchSongs(searchTerm, mediaType: mediaType, country: country);
     result.fold((exception) => {
       print(exception)
     }, (songsList) => {

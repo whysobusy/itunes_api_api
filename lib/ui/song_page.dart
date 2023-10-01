@@ -14,11 +14,6 @@ class SongPage extends StatelessWidget {
     List<Song> songs = Provider.of<SongViewModel>(context).songs;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Music Search',
-          style: TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.dark,

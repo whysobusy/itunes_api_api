@@ -1,4 +1,5 @@
 
+import 'package:itunes_api_search_app/api/media_typ.dart';
 import 'package:itunes_api_search_app/model/song_dto.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -12,17 +13,17 @@ class SongRemoteService {
   SongRemoteService({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  Future<List<SongDTO>> fetchSongs(String searchTerm) async {
+  Future<List<SongDTO>> fetchSongs(String searchTerm, {MediaType mediaType = MediaType.all, String country = 'ca'}) async {
     try {
-
+      print(mediaType);
       var songRequest = Uri.https(
         _baseUrl,
         'search',
         <String, String>{
           'term': searchTerm,
-          'media': 'music', // ?
           'attribute': 'artistTerm',
-          'limit': '5',
+          'meida': mediaType.name,
+          'limit': '100', 
         },
       );
 
@@ -31,6 +32,7 @@ class SongRemoteService {
       if (songResponse.statusCode != 200) {
         throw SongRequestException();
       }
+
       var songJson = json.decode(songResponse.body);
       final List<dynamic> results = songJson['results'];
       return results.map((json) => SongDTO.fromJson(json)).toList();
