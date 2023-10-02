@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:itunes_api_search_app/model/song.dart';
 import 'package:itunes_api_search_app/view_model/song_view_model.dart';
@@ -28,8 +26,8 @@ class _SongListViewState extends State<SongListView> {
 
   void _scrollListener() async {
     if (isLoading) return;
-    if (scrollController.position.pixels == 
-    scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
       setState(() {
         isLoading = true;
       });
@@ -41,83 +39,89 @@ class _SongListViewState extends State<SongListView> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       controller: scrollController,
-      itemCount: isLoading? widget.songs.length + 1 : widget.songs.length,
+      itemCount: isLoading ? widget.songs.length + 1 : widget.songs.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         if (index < widget.songs.length) {
           return Card(
-          elevation: 2,
-          color: Colors.white,
-          margin: const EdgeInsets.all(8.0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(3),
-          ),
-          child: Row(
-            children: [
-              // Widget displaying the artwork of the song.
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 25.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5.0),
-                  child: SizedBox(
-                    width: 80,
-                    height: 80,
-                    child: widget.songs[index].artworkUrl100 != null
-                        ? Image.network(
-                            widget.songs[index].artworkUrl100!,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => Image.asset(
+            elevation: 2,
+            color: Colors.white,
+            margin: const EdgeInsets.all(8.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(3),
+            ),
+            child: Row(
+              children: [
+                // Widget displaying the artwork of the song.
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 25.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5.0),
+                    child: SizedBox(
+                      width: 80,
+                      height: 80,
+                      child: widget.songs[index].artworkUrl100 != null
+                          ? Image.network(
+                              widget.songs[index].artworkUrl100!,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) => Image.asset(
+                                'assets/no_artwork_available.png',
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Image.asset(
                               'assets/no_artwork_available.png',
                               fit: BoxFit.cover,
                             ),
-                          )
-                        : Image.asset(
-                            'assets/no_artwork_available.png',
-                            fit: BoxFit.cover,
-                          ),
+                    ),
                   ),
                 ),
-              ),
 
-              // Widget displaying song name, artist name and album name.
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.songs[index].trackName ?? 'Unknown Track',
-                        style: Theme.of(context).textTheme.subtitle1,
-                        textScaleFactor: 1.1,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(widget.songs[index].artistName ?? 'Unknown Artist',
-                          style: Theme.of(context).textTheme.bodyText2),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(widget.songs[index].collectionName ?? 'Unknown Album',
-                          style: Theme.of(context).textTheme.caption),
-                          IconButton(onPressed: () {
-                            Provider.of<SongViewModel>(context, listen: false).toggleFavorite(widget.songs[index]);
-                          }, icon: Icon(Icons.favorite)),
-                    ],
+                // Widget displaying song name, artist name and album name.
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.songs[index].trackName ?? 'Unknown Track',
+                          style: Theme.of(context).textTheme.subtitle1,
+                          textScaleFactor: 1.1,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(widget.songs[index].artistName ?? 'Unknown Artist',
+                            style: Theme.of(context).textTheme.bodyText2),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                            widget.songs[index].collectionName ??
+                                'Unknown Album',
+                            style: Theme.of(context).textTheme.caption),
+                        IconButton(
+                            onPressed: () {
+                              Provider.of<SongViewModel>(context, listen: false)
+                                  .toggleFavorite(widget.songs[index]);
+                            },
+                            icon: Icon(Icons.favorite)),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ),
+          );
         } else {
-          return Center(child: CircularProgressIndicator(),);
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );
