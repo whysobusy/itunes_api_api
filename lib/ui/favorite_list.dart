@@ -1,56 +1,26 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:itunes_api_search_app/model/song.dart';
 import 'package:itunes_api_search_app/view_model/song_view_model.dart';
 import 'package:provider/provider.dart';
 
-class SongListView extends StatefulWidget {
-  final List<Song> songs;
-  const SongListView({
-    Key? key,
-    required this.songs,
+class FavoriteList extends StatelessWidget {
+  const FavoriteList({Key? key,
   }) : super(key: key);
 
   @override
-  State<SongListView> createState() => _SongListViewState();
-}
-
-class _SongListViewState extends State<SongListView> {
-  final scrollController = ScrollController();
-  bool isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    scrollController.addListener(_scrollListener);
-  }
-
-  void _scrollListener() async {
-    if (isLoading) return;
-    if (scrollController.position.pixels == 
-    scrollController.position.maxScrollExtent) {
-      setState(() {
-        isLoading = true;
-      });
-      print('dd');
-      await Provider.of<SongViewModel>(context, listen: false).getNextPage();
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
-
-
-  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      controller: scrollController,
-      itemCount: isLoading? widget.songs.length + 1 : widget.songs.length,
+    final List<Song> songs = Provider.of<SongViewModel>(context).favoriteList;
+    return Scaffold(
+      appBar: AppBar(
+        //backgroundColor: Colors.transparent,
+        elevation: 0,
+        //systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
+      body: ListView.builder(
+      itemCount: songs.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        if (index < widget.songs.length) {
-          return Card(
+        return Card(
           elevation: 2,
           color: Colors.white,
           margin: const EdgeInsets.all(8.0),
@@ -67,9 +37,9 @@ class _SongListViewState extends State<SongListView> {
                   child: SizedBox(
                     width: 80,
                     height: 80,
-                    child: widget.songs[index].artworkUrl100 != null
+                    child: songs[index].artworkUrl100 != null
                         ? Image.network(
-                            widget.songs[index].artworkUrl100!,
+                            songs[index].artworkUrl100!,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) => Image.asset(
                               'assets/no_artwork_available.png',
@@ -92,22 +62,22 @@ class _SongListViewState extends State<SongListView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.songs[index].trackName ?? 'Unknown Track',
+                        songs[index].trackName ?? 'Unknown Track',
                         style: Theme.of(context).textTheme.subtitle1,
                         textScaleFactor: 1.1,
                       ),
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(widget.songs[index].artistName ?? 'Unknown Artist',
+                      Text(songs[index].artistName ?? 'Unknown Artist',
                           style: Theme.of(context).textTheme.bodyText2),
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(widget.songs[index].collectionName ?? 'Unknown Album',
+                      Text(songs[index].collectionName ?? 'Unknown Album',
                           style: Theme.of(context).textTheme.caption),
                           IconButton(onPressed: () {
-                            Provider.of<SongViewModel>(context, listen: false).toggleFavorite(widget.songs[index]);
+                            Provider.of<SongViewModel>(context, listen: false).toggleFavorite(songs[index]);
                           }, icon: Icon(Icons.favorite)),
                     ],
                   ),
@@ -116,10 +86,8 @@ class _SongListViewState extends State<SongListView> {
             ],
           ),
         );
-        } else {
-          return Center(child: CircularProgressIndicator(),);
-        }
       },
+    ) 
     );
   }
 }

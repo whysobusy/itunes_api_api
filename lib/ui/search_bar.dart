@@ -55,7 +55,7 @@ class _MySearchBarState extends State<MySearchBar> {
                   onEditingComplete: () async {
                     if (_textEditingController.text.isNotEmpty) {
                       final song = _textEditingController.text;
-                      await Provider.of<SongViewModel>(context, listen: false).getSongs(song, mediaType: _mediaType);
+                      await Provider.of<SongViewModel>(context, listen: false).getSongs(searchTerm: song, mediaType: _mediaType);
                       FocusScope.of(context).requestFocus(FocusNode());
                     }
                   },
@@ -69,7 +69,7 @@ class _MySearchBarState extends State<MySearchBar> {
                   onPressed: () async {
                     if (_textEditingController.text.isNotEmpty) {
                       final song = _textEditingController.text;
-                      await Provider.of<SongViewModel>(context, listen: false).getSongs(song, mediaType: _mediaType);
+                      await Provider.of<SongViewModel>(context, listen: false).getSongs(searchTerm: song, mediaType: _mediaType);
                       FocusScope.of(context).requestFocus(FocusNode());
                     }
                   },

@@ -13,7 +13,7 @@ class SongRemoteService {
   SongRemoteService({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  Future<List<SongDTO>> fetchSongs(String searchTerm, {MediaType mediaType = MediaType.all, String country = 'ca'}) async {
+  Future<List<SongDTO>> fetchSongs(String searchTerm, {MediaType? mediaType, String? country, int page=1 , int offset=20}) async {
     try {
       print(mediaType);
       var songRequest = Uri.https(
@@ -22,8 +22,9 @@ class SongRemoteService {
         <String, String>{
           'term': searchTerm,
           'attribute': 'artistTerm',
-          'meida': mediaType.name,
-          'limit': '100', 
+          'meida': mediaType?.name ?? MediaType.all.name,
+          'offset': (offset * page).toString(),
+          'limit': '20', 
         },
       );
 
