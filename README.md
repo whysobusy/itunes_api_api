@@ -11,7 +11,7 @@ A Cross-platform Flutter app with iTunes API integration. This app follows the M
 1. clone project to local
 
     ```bash
-    git clone xxx
+    git clone https://github.com/whysobusy/itunes_api_api.git
     ```
 
 2. install [Flutter](https://flutter.io/docs/get-started/install)
@@ -24,8 +24,9 @@ A Cross-platform Flutter app with iTunes API integration. This app follows the M
     ```
 ## Mobile Preview (Android)
 
-| ![main_playlist](https://boyan01.github.io/quiet/mobile_main_playlist.png) | ![playlist detail](https://boyan01.github.io/quiet/mobile_playlist_detail.png) | ![add to playlist](https://boyan01.github.io/quiet/mobile_add_to_playlist.png) | ![artist_detail](https://boyan01.github.io/quiet/mobile_artist_detail.png) |
+| ![s1](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s1.png) | ![s11](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s11.png) | ![s2](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s2.png) | ![s3](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s3.png) |
 |:--------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|
+| ![s4](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s4.png) | ![s5](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s5.png) | ![s6](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s6.png) | ![s7](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s7.png) |
 
 ## Features
 - Search Functionality: Users can enter keywords into the search bar to find song, albumn or artist, which includes filter options for country and media type.
