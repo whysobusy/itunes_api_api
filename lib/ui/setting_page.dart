@@ -12,28 +12,33 @@ class Setting extends StatelessWidget {
       body: ListView(
         children: [
           ExpansionTile(
-            title: Text('Chapter A'),
+            title: Text(translation(context).language),
             children: <Widget>[
               // Add widgets to be shown when expanded
               ListTile(
-                title: Text('En'),
+                title: Text(translation(context).english),
                 onTap: () async {
                   Locale locale = await setLocale(ENGLISH);
+                  if (!context.mounted) return;
                   MyApp.setLocale(context, locale);
                 },
               ),
               ListTile(
-                title: Text('cn'),
+                title: Text(translation(context).chinese_s),
                 onTap: () async {
                   Locale locale = await setLocale(CHINESE_SIMPLIFIED);
+                  if (!context.mounted) return;
+
                   MyApp.setLocale(context, locale);
                 },
               ),
 
               ListTile(
-                title: Text('hk'),
+                title: Text(translation(context).chinese_t),
                 onTap: () async {
                   Locale locale = await setLocale(CHINESE_TRADITIONAL);
+                  if (!context.mounted) return;
+
                   MyApp.setLocale(context, locale);
                 },
               ),

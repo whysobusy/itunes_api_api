@@ -6,13 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 const String favCode = 'favCode';
 
 Future<void> setFav(List<Song> songs) async {
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  _prefs.setString(favCode, encode(songs));
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString(favCode, encode(songs));
 }
 
 Future<List<Song>> getFav() async {
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  final String songjson = await _prefs.getString(favCode)!;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final String songjson = prefs.getString(favCode)!;
   final List<Song> songList = decode(songjson);
   return songList;
 }

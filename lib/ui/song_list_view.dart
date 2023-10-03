@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itunes_api_search_app/language_constants.dart';
 import 'package:itunes_api_search_app/model/song.dart';
 import 'package:itunes_api_search_app/view_model/song_view_model.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,6 @@ class _SongListViewState extends State<SongListView> {
       setState(() {
         isLoading = true;
       });
-      print('dd');
       await Provider.of<SongViewModel>(context, listen: false).getNextPage();
       setState(() {
         isLoading = false;
@@ -48,7 +48,7 @@ class _SongListViewState extends State<SongListView> {
       itemBuilder: (context, index) {
         if (index < widget.songs.length) {
           return Card(
-            elevation: 2,
+            elevation: 0.5,
             color: Colors.white,
             margin: const EdgeInsets.all(8.0),
             shape: RoundedRectangleBorder(
@@ -89,37 +89,47 @@ class _SongListViewState extends State<SongListView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.songs[index].trackName ?? 'Unknown Track',
-                          style: Theme.of(context).textTheme.subtitle1,
+                          widget.songs[index].trackName ??
+                              translation(context).unknownTrack,
+                          style: Theme.of(context).textTheme.titleMedium,
                           textScaleFactor: 1.1,
                         ),
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(widget.songs[index].artistName ?? 'Unknown Artist',
-                            style: Theme.of(context).textTheme.bodyText2),
+                        Text(
+                            widget.songs[index].artistName ??
+                                translation(context).unknownArtist,
+                            style: Theme.of(context).textTheme.bodyMedium),
                         const SizedBox(
                           height: 5,
                         ),
                         Text(
                             widget.songs[index].collectionName ??
-                                'Unknown Album',
-                            style: Theme.of(context).textTheme.caption),
-                        IconButton(
-                            onPressed: () {
-                              Provider.of<SongViewModel>(context, listen: false)
-                                  .toggleFavorite(widget.songs[index]);
-                            },
-                            icon: Icon(Icons.favorite)),
+                                translation(context).unknownAlbumn,
+                            style: Theme.of(context).textTheme.bodySmall),
                       ],
                     ),
                   ),
                 ),
+
+                IconButton(
+                    onPressed: () {
+                      Provider.of<SongViewModel>(context, listen: false)
+                          .toggleFavorite(widget.songs[index]);
+                    },
+                    icon: Icon(
+                      Icons.favorite,
+                      color: Provider.of<SongViewModel>(context, listen: false)
+                              .isExist(widget.songs[index])
+                          ? Colors.pink
+                          : Colors.grey,
+                    )),
               ],
             ),
           );
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }

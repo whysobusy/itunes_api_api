@@ -4,7 +4,6 @@ import 'package:itunes_api_search_app/api/media_type.dart';
 import 'package:itunes_api_search_app/language_constants.dart';
 import 'package:itunes_api_search_app/view_model/song_view_model.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MySearchBar extends StatefulWidget {
   const MySearchBar({Key? key}) : super(key: key);
@@ -16,12 +15,26 @@ class MySearchBar extends StatefulWidget {
 class _MySearchBarState extends State<MySearchBar> {
   late final TextEditingController _textEditingController;
   MediaType? _mediaType;
-  String? _country;
+  Country? _country;
+  String? _countryText;
+  String? _mediaText;
 
   @override
   void initState() {
     super.initState();
     _textEditingController = TextEditingController();
+  }
+
+  void _setCountryText(String value) {
+    setState(() {
+      _countryText = value;
+    });
+  }
+
+  void _setMeidaText(String value) {
+    setState(() {
+      _mediaText = value;
+    });
   }
 
   @override
@@ -32,7 +45,10 @@ class _MySearchBarState extends State<MySearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      decoration: const BoxDecoration(
+          border: BorderDirectional(
+              bottom: BorderSide(width: 0.2, color: Colors.grey))),
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
@@ -61,7 +77,9 @@ class _MySearchBarState extends State<MySearchBar> {
                           .getSongs(
                               searchTerm: song,
                               mediaType: _mediaType,
-                              country: _country);
+                              country: _country?.countryCode);
+                      if (!context.mounted) return;
+
                       FocusScope.of(context).requestFocus(FocusNode());
                     }
                   },
@@ -79,7 +97,9 @@ class _MySearchBarState extends State<MySearchBar> {
                           .getSongs(
                               searchTerm: song,
                               mediaType: _mediaType,
-                              country: _country);
+                              country: _country?.countryCode);
+                      if (!context.mounted) return;
+
                       FocusScope.of(context).requestFocus(FocusNode());
                     }
                   },
@@ -87,47 +107,76 @@ class _MySearchBarState extends State<MySearchBar> {
               ),
             ],
           ),
-          DropdownButton<String>(
-              items: MediaType.values.map((e) {
-                return DropdownMenuItem<String>(
-                  child: Text(e.name),
-                  value: e.name,
-                );
-              }).toList(),
-              onChanged: (String? value) {
-                setState(() {
-                  _mediaType = MediaType.values.byName(value!);
-                });
-              }),
-          ElevatedButton(
-            onPressed: () {
-              showCountryPicker(
-                context: context,
-                onSelect: (Country country) {
-                  print('Select country: ${country.countryCode}');
-                  _country = country.countryCode;
-                },
-                // Optional. Sets the theme for the country list picker.
-                countryListTheme: CountryListThemeData(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0),
+          Row(
+            children: [
+              DropdownButton<String>(
+                  value: _mediaText,
+                  hint: Text(
+                    translation(context).media,
+                    style: const TextStyle(color: Colors.black87, fontSize: 16),
                   ),
-                  inputDecoration: InputDecoration(
-                    labelText: 'Search',
-                    hintText: 'Start typing to search',
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: const Color(0xFF8C98A8).withOpacity(0.2),
+                  underline: Container(
+                    height: 1,
+                    color: Colors.transparent,
+                  ),
+                  items: MediaType.values.map((e) {
+                    return DropdownMenuItem<String>(
+                      value: e.name,
+                      child: Text(translateButton(context, e)),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      _mediaType = MediaType.values.byName(value!);
+                      _setMeidaText(value);
+                    });
+                  }),
+              TextButton(
+                onPressed: () {
+                  showCountryPicker(
+                    context: context,
+                    onSelect: (Country country) {
+                      _country = country;
+                      _setCountryText(_country!.nameLocalized!);
+                    },
+                    // Optional. Sets the theme for the country list picker.
+                    countryListTheme: CountryListThemeData(
+                      inputDecoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue.withOpacity(0.2),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      _countryText ?? translation(context).country,
+                      style:
+                          const TextStyle(color: Colors.black87, fontSize: 16),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.brown,
+                    ),
+                  ],
                 ),
-              );
-            },
-            child: const Text('Show country picker'),
-          ),
+              ),
+              const Spacer(),
+              IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  icon: const Icon(Icons.menu))
+            ],
+          )
         ],
       ),
     );

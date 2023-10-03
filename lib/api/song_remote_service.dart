@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:itunes_api_search_app/api/media_type.dart';
 import 'package:itunes_api_search_app/model/song_dto.dart';
 import 'dart:convert';
@@ -33,8 +32,6 @@ class SongRemoteService {
           'limit': '20',
         },
       );
-
-      print(songRequest);
 
       var songResponse = await _httpClient.get(songRequest);
 

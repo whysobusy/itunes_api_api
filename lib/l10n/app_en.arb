@@ -1,4 +1,21 @@
 {
     "unknownArtist": "Unknown Artist", 
-    "searchHint": "Songs, albums or artists"
+    "unknownAlbumn": "Unknown Albumn",
+    "unknownTrack": "Unknown Track",
+    "country": "Country",
+    "media": "Media",
+    "searchHint": "Songs, albums or artists",
+    "favourite": "Favourite",
+    "setting": "Setting",
+    "language": "Language",
+    "english": "English",
+    "chinese_s": "中文简体",
+    "chinese_t": "中文繁體",
+        "artist": "Artist",
+        "track": "Track",
+        "album": "Album",
+        "musicVideo": "Music Video",
+        "mix": "Mix",
+        "song": "Song",
+        "all": "All"
 }

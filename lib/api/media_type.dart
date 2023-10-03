@@ -5,5 +5,4 @@ enum MediaType {
   musicVideo,
   mix,
   song,
-  all,
 }

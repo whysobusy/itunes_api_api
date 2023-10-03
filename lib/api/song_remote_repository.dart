@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:itunes_api_search_app/api/media_type.dart';
 import 'package:itunes_api_search_app/api/song_remote_service.dart';
 import 'package:itunes_api_search_app/model/song.dart';

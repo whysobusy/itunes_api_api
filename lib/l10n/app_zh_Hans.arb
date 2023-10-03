@@ -1,4 +1,21 @@
 {
-    "unknownArtist": "未知",
-    "searchHint": "dgg_cn"
+    "unknownArtist": "未知艺人", 
+    "unknownAlbumn": "未知专辑",
+    "unknownTrack": "未知歌曲",
+    "country": "国家",
+    "media": "媒体",
+    "searchHint": "歌曲，专辑，歌手",
+    "favourite": "收藏",
+    "setting": "设置",
+    "language": "语言",
+    "english": "English",
+    "chinese_s": "中文简体",
+    "chinese_t": "中文繁体",
+        "artist": "歌手",
+        "track": "声轧",
+        "album": "专辑",
+        "musicVideo": "音乐视频",
+        "mix": "混合",
+        "song": "歌曲",
+        "all": "All"
 }

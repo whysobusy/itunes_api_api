@@ -1,6 +1,6 @@
-import 'dart:convert';
-
+// ignore_for_file: constant_identifier_names
 import 'package:flutter/material.dart';
+import 'package:itunes_api_search_app/api/media_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -12,14 +12,14 @@ const String CHINESE_SIMPLIFIED = 'zh_cn';
 const String CHINESE_TRADITIONAL = 'zh_hk';
 
 Future<Locale> setLocale(String languageCode) async {
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  await _prefs.setString(LAGUAGE_CODE, languageCode);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(LAGUAGE_CODE, languageCode);
   return _locale(languageCode);
 }
 
 Future<Locale> getLocale() async {
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  String languageCode = _prefs.getString(LAGUAGE_CODE) ?? ENGLISH;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String languageCode = prefs.getString(LAGUAGE_CODE) ?? ENGLISH;
   return _locale(languageCode);
 }
 
@@ -52,4 +52,23 @@ String localeToLang(Locale locale) {
 
 AppLocalizations translation(BuildContext context) {
   return AppLocalizations.of(context)!;
+}
+
+String translateButton(BuildContext context, MediaType mediaType) {
+  switch (mediaType) {
+    case MediaType.musicArtist:
+      return AppLocalizations.of(context)!.artist;
+    case MediaType.musicTrack:
+      return AppLocalizations.of(context)!.track;
+    case MediaType.album:
+      return AppLocalizations.of(context)!.album;
+    case MediaType.musicVideo:
+      return AppLocalizations.of(context)!.musicVideo;
+    case MediaType.mix:
+      return AppLocalizations.of(context)!.mix;
+    case MediaType.song:
+      return AppLocalizations.of(context)!.song;
+    default:
+      return AppLocalizations.of(context)!.all;
+  }
 }

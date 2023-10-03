@@ -1,11 +1,10 @@
-import 'dart:convert';
-
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'song.freezed.dart';
 
 @freezed
-class Song with _$Song {
+class Song extends Equatable with _$Song {
   const Song._();
   const factory Song({
     String? artistName,
@@ -33,4 +32,7 @@ class Song with _$Song {
       'previewUrl': previewUrl
     };
   }
+
+  @override
+  List<Object?> get props => [artistName, collectionName, trackName];
 }
