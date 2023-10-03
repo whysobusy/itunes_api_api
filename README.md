@@ -14,7 +14,7 @@ A Cross-platform Flutter app with iTunes API integration. This app follows the M
     git clone https://github.com/whysobusy/itunes_api_api.git
     ```
 
-2. install [Flutter](https://flutter.io/docs/get-started/install)
+2. install [Flutter](https://flutter.io/docs/get-started/install) (Android)
 
 
 3. build & run in the project directory
