@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:itunes_api_search_app/api/media_type.dart';
 import 'package:itunes_api_search_app/api/song_remote_repository.dart';
+import 'package:itunes_api_search_app/favourite_share_pref.dart';
 import 'package:itunes_api_search_app/language_constants.dart';
 import 'package:itunes_api_search_app/model/song.dart';
 
@@ -33,8 +34,6 @@ class SongViewModel with ChangeNotifier {
     setSearchParam(searchTerm, mediaType, country);
     initPage();
 
-    print(mediaType);
-
     final result = await _songRepo.fetchSongs(searchTerm,
         mediaType: mediaType, country: country, lang: lang);
     result.fold(
@@ -44,7 +43,6 @@ class SongViewModel with ChangeNotifier {
   }
 
   Future<void> getNextPage() async {
-    print('next');
     final result = await _songRepo.fetchSongs(_searchTerm!,
         mediaType: _mediaType, country: _country, page: page, lang: lang);
     result.fold((exception) => {print(exception)},
@@ -57,20 +55,22 @@ class SongViewModel with ChangeNotifier {
     final isExist = _favoriteList.contains(fav);
     if (isExist) {
       _favoriteList.remove(fav);
+      setFav(_favoriteList);
     } else {
       _favoriteList.add(fav);
+      setFav(_favoriteList);
     }
+    notifyListeners();
+  }
+
+  void updateFavList() async {
+    _favoriteList = await getFav();
     notifyListeners();
   }
 
   bool isExist(Song fav) {
     final isExist = _favoriteList.contains(fav);
     return isExist;
-  }
-
-  void clearFavorite() {
-    _favoriteList = [];
-    notifyListeners();
   }
 
   void setSearchParam(
@@ -82,7 +82,6 @@ class SongViewModel with ChangeNotifier {
 
   void setLang(Locale locale) {
     lang = localeToLang(locale);
-    print(lang);
   }
 
   void initPage() {
