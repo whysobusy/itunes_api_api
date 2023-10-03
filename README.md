@@ -24,7 +24,7 @@ A Cross-platform Flutter app with iTunes API integration. This app follows the M
     ```
 ## Mobile Preview (Android)
 
-| ![s1](screenshot/s1.png) | ![s11](hscreenshot/s11.png) | ![s2](screenshot/s2.png) | ![s3](screenshot/s3.png) |
+| ![s1](screenshot/s1.png) | ![s11](screenshot/s11.png) | ![s2](screenshot/s2.png) | ![s3](screenshot/s3.png) |
 |:--------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|
 | ![s4](screenshot/s4.png) | ![s5](screenshot/s5.png) | ![s6](screenshot/s6.png) | ![s7](screenshot/s7.png) |
 
