@@ -1,7 +1,9 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:itunes_api_search_app/api/media_typ.dart';
+import 'package:intl/intl.dart';
+import 'package:itunes_api_search_app/api/media_type.dart';
 import 'package:itunes_api_search_app/api/song_remote_repository.dart';
+import 'package:itunes_api_search_app/language_constants.dart';
 import 'package:itunes_api_search_app/model/song.dart';
 
 class SongViewModel with ChangeNotifier {
@@ -12,6 +14,8 @@ class SongViewModel with ChangeNotifier {
   String? _searchTerm;
   MediaType? _mediaType;
   String? _country;
+
+  String lang = 'en_US';
 
   List<Song> _songs = [];
   List<Song> get songs {
@@ -24,15 +28,15 @@ class SongViewModel with ChangeNotifier {
   SongViewModel(this._songRepo);
 
   Future<void> getSongs(
-      {String? searchTerm,
-      MediaType mediaType = MediaType.all,
-      String country = 'ca'}) async {
+      {String? searchTerm, MediaType? mediaType, String? country}) async {
     if (searchTerm == null) return;
     setSearchParam(searchTerm, mediaType, country);
     initPage();
 
+    print(mediaType);
+
     final result = await _songRepo.fetchSongs(searchTerm,
-        mediaType: mediaType, country: country);
+        mediaType: mediaType, country: country, lang: lang);
     result.fold(
         (exception) => {print(exception)}, (songsList) => {_songs = songsList});
     notifyListeners();
@@ -42,7 +46,7 @@ class SongViewModel with ChangeNotifier {
   Future<void> getNextPage() async {
     print('next');
     final result = await _songRepo.fetchSongs(_searchTerm!,
-        mediaType: _mediaType, country: _country, page: page);
+        mediaType: _mediaType, country: _country, page: page, lang: lang);
     result.fold((exception) => {print(exception)},
         (songsList) => {_songs.addAll(songsList), print(_songs.length)});
     notifyListeners();
@@ -69,10 +73,16 @@ class SongViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void setSearchParam(String searchTerm, MediaType mediaType, String country) {
+  void setSearchParam(
+      String searchTerm, MediaType? mediaType, String? country) {
     _searchTerm = searchTerm;
     _mediaType = mediaType;
     _country = country;
+  }
+
+  void setLang(Locale locale) {
+    lang = localeToLang(locale);
+    print(lang);
   }
 
   void initPage() {

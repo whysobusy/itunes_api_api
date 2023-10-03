@@ -35,6 +35,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _locale = value;
     });
+    Provider.of<SongViewModel>(context, listen: false).setLang(_locale!);
   }
 
   @override

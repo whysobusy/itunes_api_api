@@ -20,7 +20,7 @@ mixin _$Song {
   String? get collectionName => throw _privateConstructorUsedError;
   String? get trackName => throw _privateConstructorUsedError;
   String? get artworkUrl100 => throw _privateConstructorUsedError;
-  String get previewUrl => throw _privateConstructorUsedError;
+  String? get previewUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SongCopyWith<Song> get copyWith => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $SongCopyWith<$Res> {
       String? collectionName,
       String? trackName,
       String? artworkUrl100,
-      String previewUrl});
+      String? previewUrl});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$SongCopyWithImpl<$Res, $Val extends Song>
     Object? collectionName = freezed,
     Object? trackName = freezed,
     Object? artworkUrl100 = freezed,
-    Object? previewUrl = null,
+    Object? previewUrl = freezed,
   }) {
     return _then(_value.copyWith(
       artistName: freezed == artistName
@@ -75,19 +75,18 @@ class _$SongCopyWithImpl<$Res, $Val extends Song>
           ? _value.artworkUrl100
           : artworkUrl100 // ignore: cast_nullable_to_non_nullable
               as String?,
-      previewUrl: null == previewUrl
+      previewUrl: freezed == previewUrl
           ? _value.previewUrl
           : previewUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$SongImplCopyWith<$Res> implements $SongCopyWith<$Res> {
-  factory _$$SongImplCopyWith(
-          _$SongImpl value, $Res Function(_$SongImpl) then) =
-      __$$SongImplCopyWithImpl<$Res>;
+abstract class _$$_SongCopyWith<$Res> implements $SongCopyWith<$Res> {
+  factory _$$_SongCopyWith(_$_Song value, $Res Function(_$_Song) then) =
+      __$$_SongCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -95,14 +94,13 @@ abstract class _$$SongImplCopyWith<$Res> implements $SongCopyWith<$Res> {
       String? collectionName,
       String? trackName,
       String? artworkUrl100,
-      String previewUrl});
+      String? previewUrl});
 }
 
 /// @nodoc
-class __$$SongImplCopyWithImpl<$Res>
-    extends _$SongCopyWithImpl<$Res, _$SongImpl>
-    implements _$$SongImplCopyWith<$Res> {
-  __$$SongImplCopyWithImpl(_$SongImpl _value, $Res Function(_$SongImpl) _then)
+class __$$_SongCopyWithImpl<$Res> extends _$SongCopyWithImpl<$Res, _$_Song>
+    implements _$$_SongCopyWith<$Res> {
+  __$$_SongCopyWithImpl(_$_Song _value, $Res Function(_$_Song) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,9 +110,9 @@ class __$$SongImplCopyWithImpl<$Res>
     Object? collectionName = freezed,
     Object? trackName = freezed,
     Object? artworkUrl100 = freezed,
-    Object? previewUrl = null,
+    Object? previewUrl = freezed,
   }) {
-    return _then(_$SongImpl(
+    return _then(_$_Song(
       artistName: freezed == artistName
           ? _value.artistName
           : artistName // ignore: cast_nullable_to_non_nullable
@@ -131,23 +129,23 @@ class __$$SongImplCopyWithImpl<$Res>
           ? _value.artworkUrl100
           : artworkUrl100 // ignore: cast_nullable_to_non_nullable
               as String?,
-      previewUrl: null == previewUrl
+      previewUrl: freezed == previewUrl
           ? _value.previewUrl
           : previewUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$SongImpl extends _Song {
-  const _$SongImpl(
+class _$_Song extends _Song {
+  const _$_Song(
       {this.artistName,
       this.collectionName,
       this.trackName,
       this.artworkUrl100,
-      required this.previewUrl})
+      this.previewUrl})
       : super._();
 
   @override
@@ -159,7 +157,7 @@ class _$SongImpl extends _Song {
   @override
   final String? artworkUrl100;
   @override
-  final String previewUrl;
+  final String? previewUrl;
 
   @override
   String toString() {
@@ -170,7 +168,7 @@ class _$SongImpl extends _Song {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SongImpl &&
+            other is _$_Song &&
             (identical(other.artistName, artistName) ||
                 other.artistName == artistName) &&
             (identical(other.collectionName, collectionName) ||
@@ -190,8 +188,8 @@ class _$SongImpl extends _Song {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SongImplCopyWith<_$SongImpl> get copyWith =>
-      __$$SongImplCopyWithImpl<_$SongImpl>(this, _$identity);
+  _$$_SongCopyWith<_$_Song> get copyWith =>
+      __$$_SongCopyWithImpl<_$_Song>(this, _$identity);
 }
 
 abstract class _Song extends Song {
@@ -200,7 +198,7 @@ abstract class _Song extends Song {
       final String? collectionName,
       final String? trackName,
       final String? artworkUrl100,
-      required final String previewUrl}) = _$SongImpl;
+      final String? previewUrl}) = _$_Song;
   const _Song._() : super._();
 
   @override
@@ -212,9 +210,8 @@ abstract class _Song extends Song {
   @override
   String? get artworkUrl100;
   @override
-  String get previewUrl;
+  String? get previewUrl;
   @override
   @JsonKey(ignore: true)
-  _$$SongImplCopyWith<_$SongImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_SongCopyWith<_$_Song> get copyWith => throw _privateConstructorUsedError;
 }

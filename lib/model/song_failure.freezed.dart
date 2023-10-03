@@ -89,19 +89,18 @@ class _$SongFailureCopyWithImpl<$Res, $Val extends SongFailure>
 }
 
 /// @nodoc
-abstract class _$$ApiImplCopyWith<$Res> implements $SongFailureCopyWith<$Res> {
-  factory _$$ApiImplCopyWith(_$ApiImpl value, $Res Function(_$ApiImpl) then) =
-      __$$ApiImplCopyWithImpl<$Res>;
+abstract class _$$_ApiCopyWith<$Res> implements $SongFailureCopyWith<$Res> {
+  factory _$$_ApiCopyWith(_$_Api value, $Res Function(_$_Api) then) =
+      __$$_ApiCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? errorMessage});
 }
 
 /// @nodoc
-class __$$ApiImplCopyWithImpl<$Res>
-    extends _$SongFailureCopyWithImpl<$Res, _$ApiImpl>
-    implements _$$ApiImplCopyWith<$Res> {
-  __$$ApiImplCopyWithImpl(_$ApiImpl _value, $Res Function(_$ApiImpl) _then)
+class __$$_ApiCopyWithImpl<$Res> extends _$SongFailureCopyWithImpl<$Res, _$_Api>
+    implements _$$_ApiCopyWith<$Res> {
+  __$$_ApiCopyWithImpl(_$_Api _value, $Res Function(_$_Api) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +108,7 @@ class __$$ApiImplCopyWithImpl<$Res>
   $Res call({
     Object? errorMessage = freezed,
   }) {
-    return _then(_$ApiImpl(
+    return _then(_$_Api(
       freezed == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -120,8 +119,8 @@ class __$$ApiImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ApiImpl extends _Api {
-  const _$ApiImpl(this.errorMessage) : super._();
+class _$_Api extends _Api {
+  const _$_Api(this.errorMessage) : super._();
 
   @override
   final String? errorMessage;
@@ -135,7 +134,7 @@ class _$ApiImpl extends _Api {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ApiImpl &&
+            other is _$_Api &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
@@ -146,8 +145,8 @@ class _$ApiImpl extends _Api {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ApiImplCopyWith<_$ApiImpl> get copyWith =>
-      __$$ApiImplCopyWithImpl<_$ApiImpl>(this, _$identity);
+  _$$_ApiCopyWith<_$_Api> get copyWith =>
+      __$$_ApiCopyWithImpl<_$_Api>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -207,13 +206,12 @@ class _$ApiImpl extends _Api {
 }
 
 abstract class _Api extends SongFailure {
-  const factory _Api(final String? errorMessage) = _$ApiImpl;
+  const factory _Api(final String? errorMessage) = _$_Api;
   const _Api._() : super._();
 
   @override
   String? get errorMessage;
   @override
   @JsonKey(ignore: true)
-  _$$ApiImplCopyWith<_$ApiImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_ApiCopyWith<_$_Api> get copyWith => throw _privateConstructorUsedError;
 }

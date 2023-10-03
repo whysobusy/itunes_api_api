@@ -12,7 +12,7 @@ class SongDTO with _$SongDTO {
     String? collectionName,
     String? trackName,
     String? artworkUrl100,
-    required String previewUrl,
+    String? previewUrl,
   }) = _SongDTO;
 
   Song toDomain() => Song(

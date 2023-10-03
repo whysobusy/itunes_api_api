@@ -10,6 +10,6 @@ class Song with _$Song {
     String? collectionName,
     String? trackName,
     String? artworkUrl100,
-    required String previewUrl,
+    String? previewUrl,
   }) = _Song;
 }

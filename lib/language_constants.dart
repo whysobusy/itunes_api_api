@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,6 +33,20 @@ Locale _locale(String languageCode) {
       return const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant');
     default:
       return const Locale('en', '');
+  }
+}
+
+String localeToLang(Locale locale) {
+  switch (locale.languageCode) {
+    case 'zh':
+      if (locale.scriptCode == 'Hant') {
+        return 'zh_hk';
+      } else {
+        return 'zh_cn';
+      }
+    case 'en':
+    default:
+      return 'en_us';
   }
 }
 

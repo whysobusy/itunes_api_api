@@ -1,6 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:itunes_api_search_app/api/media_typ.dart';
+import 'package:itunes_api_search_app/api/media_type.dart';
 import 'package:itunes_api_search_app/language_constants.dart';
 import 'package:itunes_api_search_app/view_model/song_view_model.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +15,8 @@ class MySearchBar extends StatefulWidget {
 
 class _MySearchBarState extends State<MySearchBar> {
   late final TextEditingController _textEditingController;
-  MediaType _mediaType = MediaType.all;
-  Country _country = CountryService().findByCode("CA")!;
+  MediaType? _mediaType;
+  String? _country;
 
   @override
   void initState() {
@@ -58,7 +58,10 @@ class _MySearchBarState extends State<MySearchBar> {
                     if (_textEditingController.text.isNotEmpty) {
                       final song = _textEditingController.text;
                       await Provider.of<SongViewModel>(context, listen: false)
-                          .getSongs(searchTerm: song, mediaType: _mediaType);
+                          .getSongs(
+                              searchTerm: song,
+                              mediaType: _mediaType,
+                              country: _country);
                       FocusScope.of(context).requestFocus(FocusNode());
                     }
                   },
@@ -73,7 +76,10 @@ class _MySearchBarState extends State<MySearchBar> {
                     if (_textEditingController.text.isNotEmpty) {
                       final song = _textEditingController.text;
                       await Provider.of<SongViewModel>(context, listen: false)
-                          .getSongs(searchTerm: song, mediaType: _mediaType);
+                          .getSongs(
+                              searchTerm: song,
+                              mediaType: _mediaType,
+                              country: _country);
                       FocusScope.of(context).requestFocus(FocusNode());
                     }
                   },
@@ -82,7 +88,6 @@ class _MySearchBarState extends State<MySearchBar> {
             ],
           ),
           DropdownButton<String>(
-              value: _mediaType.name,
               items: MediaType.values.map((e) {
                 return DropdownMenuItem<String>(
                   child: Text(e.name),
@@ -100,7 +105,7 @@ class _MySearchBarState extends State<MySearchBar> {
                 context: context,
                 onSelect: (Country country) {
                   print('Select country: ${country.countryCode}');
-                  _country = country;
+                  _country = country.countryCode;
                 },
                 // Optional. Sets the theme for the country list picker.
                 countryListTheme: CountryListThemeData(
