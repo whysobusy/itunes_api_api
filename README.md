@@ -17,14 +17,14 @@ A Cross-platform Flutter app with iTunes API integration. This app follows the M
 2. install [Flutter](https://flutter.io/docs/get-started/install)
 
 
-3. build & run
+3. build & run in the project directory
 
     ```bash
     flutter run --profile
     ```
 ## Mobile Preview (Android)
 
-| ![s1](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s1.png) | ![s11](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s11.png) | ![s2](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s2.png) | ![s3](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s3.png) |
+| ![s1](screenshot/s1.png) | ![s11](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s11.png) | ![s2](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s2.png) | ![s3](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s3.png) |
 |:--------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|
 | ![s4](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s4.png) | ![s5](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s5.png) | ![s6](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s6.png) | ![s7](https://github.com/whysobusy/itunes_api_api/tree/main/screenshot/s7.png) |
 
